@@ -16,11 +16,13 @@ public class HuntWumpuses {
 	public static int[] play(Hunter[] hunters){
 		
 		HuntWumpuses.hunters = hunters;
-		System.out.println(-1%5);
+		arrowKills = 0;
+		wumpusVictory = 0;
+		
 		createMap();
-		printMap();
+		//printMap();
 		initiatePlayers();
-		debug();
+		//debug();
 		while(!gameOver()){
 			
 			informHunters();
@@ -30,7 +32,7 @@ public class HuntWumpuses {
 			wumpus.respond();
 			evaluateDeaths();
 			days++;
-			debug();
+			//debug();
 		}
 		
 		return results();
@@ -159,15 +161,16 @@ public class HuntWumpuses {
 	}
 	
 	private static boolean gameOver(){
-		if(!wumpus.alive || livingHunters <= 0){
-			if(wumpus.alive){
-				wumpusVictory = 1;
-			}
+		if(livingHunters <= 0){
+			wumpusVictory = 1;
+			return true;
+		}
+		if(!wumpus.alive){
 			return true;
 		}
 		if(days > 100){
 			for(Hunter h : hunters){
-				System.out.println("Starvation!");
+				//System.out.println("Starvation!");
 				h.alive = false;
 			}
 			wumpusVictory = 1;
@@ -213,6 +216,7 @@ public class HuntWumpuses {
 		
 		for(int i = 0; i < hunters.length; i++){
 			hunters[i].setRoom(map[rand.nextInt(20)]);
+			hunters[i].newGame();
 		}
 		
 		wumpus = new Wumpus(map[rand.nextInt(20)]);

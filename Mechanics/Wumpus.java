@@ -28,7 +28,7 @@ public class Wumpus extends Occupant {
 		//Wumpus is shot, maybe he dies, maybe he eats ALL the peeps
 			if(!alive){
 				if(rand.nextInt() % 5 == 0 || debugRage){
-					System.out.println("Wumpus is enraged!");
+					//System.out.println("Wumpus is enraged!");
 					enraged = true;
 					alive = true;
 					panic();
@@ -38,6 +38,13 @@ public class Wumpus extends Occupant {
 			}
 		
 		
+		//Shooting?
+		for(Room r : room.neighbors){
+			if(r.isShotInto){
+				panic();
+			}
+		}
+			
 		//Corpses? Wumpus likes corpseses
 		for(Room r : room.neighbors){
 			for(Occupant o : r.occupants){
@@ -50,12 +57,7 @@ public class Wumpus extends Occupant {
 			}
 		}
 		
-		//Shooting?
-		for(Room r : room.neighbors){
-			if(r.isShotInto){
-				panic();
-			}
-		}
+		
 		
 		//Maybe Wumpus is bored, Wumpus go find food
 		
@@ -97,6 +99,14 @@ public class Wumpus extends Occupant {
 	}
 	
 	private void move(Room r){
+		//Eat ALL the peoples
+		for(Occupant o : room.occupants){
+			if(!o.type.equals("Wumpus")){
+				o.alive = false;
+				o.type = "Corpse";
+			}
+		}
+		
 		//change rooms
 		room = r;
 		

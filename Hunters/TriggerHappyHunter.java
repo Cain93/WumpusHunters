@@ -16,12 +16,12 @@ public class TriggerHappyHunter extends Hunter {
 
 	public void getResponse(boolean[] status){
 	
-	System.out.println("Shots = " + shots);
+	//System.out.println("Shots = " + shots);
 	switch(shots){
 	case 0 :
 		if(status[0] || status[1]){
-			System.out.println("Sensed something");
-			System.out.println("Shooting left");
+			//System.out.println("Sensed something");
+			//System.out.println("Shooting left");
 			nextMove = Move.SHOOT;
 			nextDirection = Direction.LEFT;
 			shots++;
@@ -29,13 +29,13 @@ public class TriggerHappyHunter extends Hunter {
 		else{ wander(); }
 		break;
 	case 1 : 
-		System.out.println("Shooting right");
+		//System.out.println("Shooting right");
 		nextMove = Move.SHOOT;
 		nextDirection = Direction.RIGHT;
 		shots++;
 		break;
 	case 2 :
-		System.out.println("Shooting back");
+		//System.out.println("Shooting back");
 		nextMove = Move.SHOOT;
 		nextDirection = Direction.BACK;
 		shots = 0;
@@ -48,11 +48,11 @@ public class TriggerHappyHunter extends Hunter {
 	}
 	
 	private void wander(){
-		System.out.println("Wandering");
+		//System.out.println("Wandering");
 		Random rand = new Random();
 		nextMove = Move.MOVE;
 		int r = rand.nextInt(3);
-		System.out.println("r = " + r);
+		//System.out.println("r = " + r);
 		switch(r % 3){
 		case 0 :
 			nextDirection = Direction.LEFT;

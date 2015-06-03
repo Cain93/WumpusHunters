@@ -25,6 +25,8 @@ public class Hunter extends Occupant {
 		nextDirection = Direction.HERE;
 	}
 	
+	public void newGame(){}
+	
 	protected void setRoom(Room r){
 		prevRoom = room;
 		room = r;
