@@ -215,11 +215,16 @@ public class HuntWumpuses {
 		Random rand = new Random();
 		
 		for(int i = 0; i < hunters.length; i++){
-			hunters[i].setRoom(map[rand.nextInt(20)]);
+			int r = rand.nextInt(20);
+			while(!map[r].occupants.isEmpty()){ r = rand.nextInt(20); }
+			hunters[i].setRoom(map[r]);
 			hunters[i].newGame();
+			
 		}
 		
-		wumpus = new Wumpus(map[rand.nextInt(20)]);
+		int r = rand.nextInt(20);
+		while(!map[r].occupants.isEmpty()){ r = rand.nextInt(20); }
+		wumpus = new Wumpus(map[r]);
 		livingHunters = hunters.length;
 	}
 	
@@ -248,16 +253,16 @@ public class HuntWumpuses {
 	static int[] results(){
 		
 		int[] scores = new int[hunters.length + 2];
-		System.out.println("Results");
+		//System.out.println("Results");
 		for(int i = 0; i < hunters.length; i++){
 			Hunter h = hunters[i];
 			scores[i] = 0;
-			System.out.print("Hunter " + h.name + " : ");
+			//System.out.print("Hunter " + h.name + " : ");
 			if(h.alive){ 
-				System.out.println(" Alive, score = " + (60 / livingHunters));
+				//System.out.println(" Alive, score = " + (60 / livingHunters));
 				scores[i] = 60 / livingHunters;
 			}
-			else{ System.out.println(" Dead"); }
+			//else{ System.out.println(" Dead"); }
 		}
 		
 		days = 0;

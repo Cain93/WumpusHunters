@@ -1,9 +1,11 @@
 package Mechanics;
+
+
 import Hunters.*;
 
 
 public class MetaManager {
-	static int NUM_GAMES = 1;
+	static int NUM_GAMES = 1000;
 	public MetaManager() {
 		
 	}
@@ -11,7 +13,7 @@ public class MetaManager {
 	public static void main(String[] args){
 		
 		
-		Hunter[] hunters = {new ParanoidHunter(), new TriggerHappyHunter(), new HuddleHunter(), new RandomHunter(), new HumanHunter()};
+		Hunter[] hunters = {/*new ParanoidHunter(), new TriggerHappyHunter(), new HuddleHunter(), new RandomHunter(),*/ new Badger(), new Idomeneus(), new MonsterHunter(), new PacingHunter(), new ScaredyCat()};
 		int[] scores = new int[hunters.length + 2];
 		int totalGames = 0;
 		
@@ -30,8 +32,8 @@ public class MetaManager {
 							scores[b] += newScores[1];
 							scores[c] += newScores[2];
 							scores[d] += newScores[3];
-							scores[hunters.length] += newScores[4];
-							scores[hunters.length + 1] += newScores[5];
+							scores[scores.length - 2] += newScores[4];
+							scores[scores.length - 1] += newScores[5];
 						}
 						
 					}
@@ -40,15 +42,28 @@ public class MetaManager {
 		}
 		
 		
+		//How many games is each hunter in?
+		int gamesPerHunter = choose(hunters.length - 1, 3) * NUM_GAMES;
+		
+		
 		for(int j = 0; j < hunters.length; j++){
-			System.out.println(hunters[j].name + " : " + scores[j]);
+			double normalized = Math.floor((double)scores[j]/(double)gamesPerHunter * 100) / 100;
+			System.out.println(hunters[j].name + " : " + scores[j] + " (" + normalized + ")");
 			
 		}
 		System.out.println("Total rounds: " + totalGames);
-		System.out.println("Humans killed by arrows: " +  scores[4]);
-		System.out.println("Wumpus victories: " +  scores[5]);
+		System.out.println("Humans killed by arrows: " +  scores[scores.length - 2]);
+		System.out.println("Wumpus victories: " +  scores[scores.length - 1]);
 		
 		
+	}
+	
+	public static int choose(int total, int choose){
+	    if(total < choose)
+	        return 0;
+	    if(choose == 0 || choose == total)
+	        return 1;
+	    return choose(total-1,choose-1)+choose(total-1,choose);
 	}
 
 }
