@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class HuntWumpuses {
 	
-	static int NUM_DAYS = 100;
+	static int NUM_DAYS = 1000;
 	static int days = 0;
 	static Room[] map = new Room[20];
 	static Hunter[] hunters;

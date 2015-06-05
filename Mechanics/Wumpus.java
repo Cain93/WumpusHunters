@@ -100,14 +100,22 @@ public class Wumpus extends Occupant {
 	}
 	
 	private void move(Room r){
-		//Eat ALL the peoples
+		Occupant food = null;
+		
+		//Kill ALL the peoples
 		for(Occupant o : room.occupants){
 			if(o.type.equals("Hunter")){
 				o.alive = false;
 				o.type = "Corpse";
 				kills++;
 			}
+			else if(o.type.equals("Corpse")){
+				food = o;
+			}
 		}
+		
+		//Eat the corpses
+		//room.occupants.remove(food);
 		
 		//change rooms
 		room = r;
