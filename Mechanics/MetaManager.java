@@ -13,8 +13,8 @@ public class MetaManager {
 	public static void main(String[] args){
 		
 		
-		Hunter[] hunters = {/*new ParanoidHunter(), new TriggerHappyHunter(), new HuddleHunter(), new RandomHunter(),*/ new Badger(), new Idomeneus(), new MonsterHunter(), new PacingHunter(), new ScaredyCat()};
-		int[] scores = new int[hunters.length + 2];
+		Hunter[] hunters = {new ParanoidHunter(), new TriggerHappyHunter(), new HuddleHunter(), new RandomHunter(), new Badger(), new Idomeneus(), new MonsterHunter(), new PacingHunter(), new ScaredyCat(), new NascarHunter(), new EatsShootsAndLeaves(), new Pacifist(), new Laomedon()};
+		int[] scores = new int[hunters.length + 4];
 		int totalGames = 0;
 		
 		//There's gotta be a better way to do this...
@@ -32,8 +32,11 @@ public class MetaManager {
 							scores[b] += newScores[1];
 							scores[c] += newScores[2];
 							scores[d] += newScores[3];
-							scores[scores.length - 2] += newScores[4];
-							scores[scores.length - 1] += newScores[5];
+					
+							scores[scores.length - 4] += newScores[4];
+							scores[scores.length - 3] += newScores[5];
+							scores[scores.length - 2] += newScores[6];
+							scores[scores.length - 1] += newScores[7];
 						}
 						
 					}
@@ -52,7 +55,9 @@ public class MetaManager {
 			
 		}
 		System.out.println("Total rounds: " + totalGames);
-		System.out.println("Humans killed by arrows: " +  scores[scores.length - 2]);
+		System.out.println("Humans killed by arrows: " +  scores[scores.length - 4]);
+		System.out.println("Humans dead by starvation: " +  scores[scores.length - 3]);
+		System.out.println("Humans killed by wumpus: " +  scores[scores.length - 2]);
 		System.out.println("Wumpus victories: " +  scores[scores.length - 1]);
 		
 		

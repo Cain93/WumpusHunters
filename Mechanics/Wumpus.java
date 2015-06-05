@@ -8,6 +8,7 @@ public class Wumpus extends Occupant {
 	private boolean enraged = false;
 	private int daysLeft = 5;
 	final boolean debugRage = false;
+	protected int kills = 0;
 	
 	public Wumpus(Room r) {
 		room = r;
@@ -101,9 +102,10 @@ public class Wumpus extends Occupant {
 	private void move(Room r){
 		//Eat ALL the peoples
 		for(Occupant o : room.occupants){
-			if(!o.type.equals("Wumpus")){
+			if(o.type.equals("Hunter")){
 				o.alive = false;
 				o.type = "Corpse";
+				kills++;
 			}
 		}
 		
