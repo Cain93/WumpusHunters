@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class HuntWumpuses {
 	
-	static int NUM_DAYS = 1000;
+	static int NUM_DAYS = 100;
 	static int days = 0;
 	static Room[] map = new Room[20];
 	static Hunter[] hunters;
@@ -15,7 +15,7 @@ public class HuntWumpuses {
 	static int wumpusVictory = 0;
 	static int starvations = 0;
 
-	public static int[] play(Hunter[] hunters){
+	public static int[][] play(Hunter[] hunters){
 		
 		HuntWumpuses.hunters = hunters;
 		arrowKills = 0;
@@ -254,9 +254,10 @@ public class HuntWumpuses {
 		}
 	}
 	
-	static int[] results(){
+	static int[][] results(){
 		
-		int[] scores = new int[hunters.length + 4];
+		int[] scores = new int[hunters.length];
+		int[] stats = new int[4];
 		//System.out.println("Results");
 		for(int i = 0; i < hunters.length; i++){
 			Hunter h = hunters[i];
@@ -273,11 +274,12 @@ public class HuntWumpuses {
 		for(Hunter h: hunters){
 			h.alive = true;
 		}
-		scores[4] = arrowKills;
-		scores[5] = starvations;
-		scores[6] = wumpus.kills;
-		scores[7] = wumpusVictory;
-		return scores;
+		stats[0] = arrowKills;
+		stats[1] = starvations;
+		stats[2] = wumpus.kills;
+		stats[3] = wumpusVictory;
+		int[][] results = {scores, stats};
+		return results;
 	}
 	
 	
