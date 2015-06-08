@@ -13,13 +13,12 @@ public class MetaManager {
 	public static void main(String[] args){
 		
 		
-		
 		Hunter[] hunters = {new ParanoidHunter(), new TriggerHappyHunter(), new HuddleHunter(), new RandomHunter(), new Badger(), 
 							new Idomeneus(), new MonsterHunter(), new PacingHunter(), new ScaredyCat(), new NascarHunter(), 
 							new EatsShootsAndLeaves(), new Pacifist(), new Laomedon(), new FullCoverageHunter(), new NealHunter(), 
-							new WalkingIdiot(), new ElmerFudd(), new Stay() }; 
+							new WalkingIdiot(), new ElmerFudd(), new Stay()}; 
 		int[] scores = new int[hunters.length];
-		int[] stats = new int[4];
+		int[] stats = {0,0,0,0};
 		int totalGames = 0;
 		
 		//There's gotta be a better way to do this...
@@ -42,6 +41,12 @@ public class MetaManager {
 							stats[1] += newScores[1][1];
 							stats[2] += newScores[1][2];
 							stats[3] += newScores[1][3];
+							
+//							System.out.println("Total rounds: " + totalGames);
+//							System.out.println("Humans killed by arrows: " +  stats[0]);
+//							System.out.println("Humans dead by starvation: " +  stats[1]);
+//							System.out.println("Humans killed by wumpus: " +  stats[2]);
+//							System.out.println("Wumpus victories: " +  stats[3]);
 						}
 						
 					}
@@ -63,10 +68,10 @@ public class MetaManager {
 			
 		}
 		System.out.println("Total rounds: " + totalGames);
-		System.out.println("Humans killed by arrows: " +  stats[0]);
-		System.out.println("Humans dead by starvation: " +  stats[1]);
-		System.out.println("Humans killed by wumpus: " +  stats[2]);
-		System.out.println("Wumpus victories: " +  stats[3]);
+		System.out.println("Humans killed by arrows: " +  stats[0] + " (" + Math.floor((double)stats[0]/(double)totalGames * 100) / 100 + ")");
+		System.out.println("Humans dead by starvation: " +  stats[1] + " (" + Math.floor((double)stats[1]/(double)totalGames * 100) / 100 + ")");
+		System.out.println("Humans killed by wumpus: " +  stats[2] + " (" + Math.floor((double)stats[2]/(double)totalGames * 100) / 100 + ")");
+		System.out.println("Wumpus victories: " +  stats[3] + " (" + Math.floor((double)stats[3]/(double)totalGames * 100) / 100 + ")");
 		
 		
 	}

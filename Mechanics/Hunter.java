@@ -7,7 +7,7 @@ public class Hunter extends Occupant {
 	protected Direction nextDirection;
 	private Room room;
 	private Room prevRoom;
-	public String name;
+	
 	
 	public Hunter(){
 		type = "Hunter";

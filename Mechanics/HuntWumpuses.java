@@ -1,4 +1,6 @@
 package Mechanics;
+import Hunters.*;
+
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -14,6 +16,24 @@ public class HuntWumpuses {
 	static int arrowKills = 0;
 	static int wumpusVictory = 0;
 	static int starvations = 0;
+	
+	public static void main(String[] args){
+		Hunter[] h = {new EmoHunter(), new NascarHunter(), new FullCoverageHunter(), new TriggerHappyHunter() };
+		
+		int[][] a = play(h);
+		int[] scores = a[0];
+		int[] stats = a[1];
+			
+		for(int j = 0; j < h.length; j++){
+			System.out.println((j+1) + ". " + h[j].name + " : " + scores[j]);
+			
+		}
+
+		System.out.println("Humans killed by arrows: " +  stats[0]);
+		System.out.println("Humans dead by starvation: " +  stats[1]);
+		System.out.println("Humans killed by wumpus: " +  stats[2]);
+		System.out.println("Wumpus victories: " +  stats[3]);
+	}
 
 	public static int[][] play(Hunter[] hunters){
 		
@@ -144,7 +164,9 @@ public class HuntWumpuses {
 				int dead = rand.nextInt(r.occupants.size());
 				Occupant killed = r.occupants.get(dead);
 				killed.alive = false;
-				if(killed.type.equals("Hunter")){ arrowKills++;}
+				if(killed.type.equals("Hunter")){
+					arrowKills++;
+				}
 				killed.type = "Corpse";
 			}
 		}
@@ -223,6 +245,8 @@ public class HuntWumpuses {
 			while(!map[r].occupants.isEmpty()){ r = rand.nextInt(20); }
 			hunters[i].setRoom(map[r]);
 			hunters[i].newGame();
+			hunters[i].type = "Hunter";
+			hunters[i].alive = true;
 			
 		}
 		
